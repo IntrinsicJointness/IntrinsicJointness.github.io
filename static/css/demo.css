@@ -2,13 +2,19 @@
 html { scroll-behavior: smooth; }
 
 .teaser-image {
-  width: 100%;
-  margin-bottom: 1rem;
+  display: block;
+  width: 70%;
+  margin: 0 auto 1rem;
 }
 
 .method-image {
-  width: 100%;
-  margin-top: 0.5rem;
+  display: block;
+  width: 55%;
+  margin: 0.5rem auto 0;
+}
+
+@media screen and (max-width: 768px) {
+  .teaser-image, .method-image { width: 100%; }
 }
 
 .method-caption {
