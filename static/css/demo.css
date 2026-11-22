@@ -241,9 +241,16 @@ table.prompt-levels .blank {
 }
 .av-tags.match .av-tag, .av-inline.match { color: #257849; background: #DEF3E7; }
 .av-tags.mismatch .av-tag, .av-inline.mismatch { color: #B03A2E; background: #FBE5E1; }
-.av-tags.match .av-mark { color: #257849; }
-.av-tags.mismatch .av-mark { color: #B03A2E; }
-.av-inline { padding: 0 0.3em; border-radius: 3px; font-weight: 600; }
+/* relation sign between the two tags: '=' (match) / '≠' (mismatch) */
+.av-rel {
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1;
+  margin: 0 0.1rem;
+}
+.av-tags.match .av-rel { color: #257849; }
+.av-tags.mismatch .av-rel { color: #B03A2E; }
+.av-inline { padding: 0 0.35em; border-radius: 3px; font-weight: 700; }
 
 .pair-orig {
   color: #7a7a7a;

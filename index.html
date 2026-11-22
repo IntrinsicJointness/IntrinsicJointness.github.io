@@ -169,7 +169,7 @@
 
     <div class="content has-text-justified">
       <p>UNSAIDBench (<b>UN</b>derspecified <b>S</b>emantics in <b>A</b>udio-v<b>ID</b>eo generation) adapts the complex, real-world prompts of JavisBench to inject one underspecified shared factor per prompt. Following the AudioSet ontology, fine-grained event identities are abstracted into their parent categories (for example, &ldquo;harp&rdquo; becomes &ldquo;musical instrument&rdquo; and &ldquo;cat&rdquo; becomes &ldquo;pet&rdquo;) while the surrounding context is kept intact. Each stream can resolve the underspecified factor on its own; intrinsic jointness requires both to resolve it the same way. The underspecified shared factor is <span class="hl-purple">highlighted</span> in each prompt.</p>
-      <p>Each slide shows, for the model named on top, a clip from the base model (left) and from the same model post-trained with JointREPA (right), generated from the same prompt and seed. Below each clip, <b>Video</b> and <b>Audio</b> name what the video shows and what the audio sounds like (<span class="av-inline match">green</span>: the two streams agree, <span class="av-inline mismatch">red</span>: they do not). All clips have sound. <i class="fas fa-volume-up"></i> Turn on audio; starting one clip pauses the others.</p>
+      <p>Each slide shows, for the model named on top, a clip from the base model (left) and from the same model post-trained with JointREPA (right), generated from the same prompt and seed. Below each clip, <b>Video</b> and <b>Audio</b> name what the video shows and what the audio sounds like (<span class="av-inline match">=</span> the two streams agree, <span class="av-inline mismatch">&ne;</span> they do not). All clips have sound. <i class="fas fa-volume-up"></i> Turn on audio; starting one clip pauses the others.</p>
     </div>
     
     <div class="pair-slider">
@@ -186,7 +186,7 @@
               </video>
             </div>
             <p class="pair-label">Base</p>
-            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Flute</span><span class="av-tag"><span class="av-key">Audio</span> Piano</span><i class="fas fa-times av-mark" aria-label="mismatch"></i></div>
+            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Flute</span><span class="av-rel" role="img" aria-label="does not match">&ne;</span><span class="av-tag"><span class="av-key">Audio</span> Piano</span></div>
           </div>
           <div class="column has-text-centered">
             <div class="pair-video-box">
@@ -195,7 +195,7 @@
               </video>
             </div>
             <p class="pair-label is-ours">+ JointREPA (Ours)</p>
-            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Flute</span><span class="av-tag"><span class="av-key">Audio</span> Flute</span><i class="fas fa-check av-mark" aria-label="match"></i></div>
+            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Flute</span><span class="av-rel" role="img" aria-label="matches">=</span><span class="av-tag"><span class="av-key">Audio</span> Flute</span></div>
           </div>
         </div>
       </div>
@@ -211,7 +211,7 @@
               </video>
             </div>
             <p class="pair-label">Base</p>
-            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Cat</span><span class="av-tag"><span class="av-key">Audio</span> Dog</span><i class="fas fa-times av-mark" aria-label="mismatch"></i></div>
+            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Cat</span><span class="av-rel" role="img" aria-label="does not match">&ne;</span><span class="av-tag"><span class="av-key">Audio</span> Dog</span></div>
           </div>
           <div class="column has-text-centered">
             <div class="pair-video-box">
@@ -220,7 +220,7 @@
               </video>
             </div>
             <p class="pair-label is-ours">+ JointREPA (Ours)</p>
-            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Cat</span><span class="av-tag"><span class="av-key">Audio</span> Cat</span><i class="fas fa-check av-mark" aria-label="match"></i></div>
+            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Cat</span><span class="av-rel" role="img" aria-label="matches">=</span><span class="av-tag"><span class="av-key">Audio</span> Cat</span></div>
           </div>
         </div>
       </div>
@@ -236,7 +236,7 @@
               </video>
             </div>
             <p class="pair-label">Base</p>
-            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Zither</span><span class="av-tag"><span class="av-key">Audio</span> Flute</span><i class="fas fa-times av-mark" aria-label="mismatch"></i></div>
+            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Zither</span><span class="av-rel" role="img" aria-label="does not match">&ne;</span><span class="av-tag"><span class="av-key">Audio</span> Flute</span></div>
           </div>
           <div class="column has-text-centered">
             <div class="pair-video-box">
@@ -245,7 +245,7 @@
               </video>
             </div>
             <p class="pair-label is-ours">+ JointREPA (Ours)</p>
-            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Guitar</span><span class="av-tag"><span class="av-key">Audio</span> Guitar</span><i class="fas fa-check av-mark" aria-label="match"></i></div>
+            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Guitar</span><span class="av-rel" role="img" aria-label="matches">=</span><span class="av-tag"><span class="av-key">Audio</span> Guitar</span></div>
           </div>
         </div>
       </div>
@@ -261,7 +261,7 @@
               </video>
             </div>
             <p class="pair-label">Base</p>
-            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Woman</span><span class="av-tag"><span class="av-key">Audio</span> Male speech</span><i class="fas fa-times av-mark" aria-label="mismatch"></i></div>
+            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Woman</span><span class="av-rel" role="img" aria-label="does not match">&ne;</span><span class="av-tag"><span class="av-key">Audio</span> Male speech</span></div>
           </div>
           <div class="column has-text-centered">
             <div class="pair-video-box">
@@ -270,7 +270,7 @@
               </video>
             </div>
             <p class="pair-label is-ours">+ JointREPA (Ours)</p>
-            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Woman</span><span class="av-tag"><span class="av-key">Audio</span> Female speech</span><i class="fas fa-check av-mark" aria-label="match"></i></div>
+            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Woman</span><span class="av-rel" role="img" aria-label="matches">=</span><span class="av-tag"><span class="av-key">Audio</span> Female speech</span></div>
           </div>
         </div>
       </div>
@@ -286,7 +286,7 @@
               </video>
             </div>
             <p class="pair-label">Base</p>
-            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Dog</span><span class="av-tag"><span class="av-key">Audio</span> Cat</span><i class="fas fa-times av-mark" aria-label="mismatch"></i></div>
+            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Dog</span><span class="av-rel" role="img" aria-label="does not match">&ne;</span><span class="av-tag"><span class="av-key">Audio</span> Cat</span></div>
           </div>
           <div class="column has-text-centered">
             <div class="pair-video-box">
@@ -295,7 +295,7 @@
               </video>
             </div>
             <p class="pair-label is-ours">+ JointREPA (Ours)</p>
-            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Dog</span><span class="av-tag"><span class="av-key">Audio</span> Dog</span><i class="fas fa-check av-mark" aria-label="match"></i></div>
+            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Dog</span><span class="av-rel" role="img" aria-label="matches">=</span><span class="av-tag"><span class="av-key">Audio</span> Dog</span></div>
           </div>
         </div>
       </div>
@@ -311,7 +311,7 @@
               </video>
             </div>
             <p class="pair-label">Base</p>
-            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Cattle</span><span class="av-tag"><span class="av-key">Audio</span> Chicken</span><i class="fas fa-times av-mark" aria-label="mismatch"></i></div>
+            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Cattle</span><span class="av-rel" role="img" aria-label="does not match">&ne;</span><span class="av-tag"><span class="av-key">Audio</span> Chicken</span></div>
           </div>
           <div class="column has-text-centered">
             <div class="pair-video-box">
@@ -320,7 +320,7 @@
               </video>
             </div>
             <p class="pair-label is-ours">+ JointREPA (Ours)</p>
-            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Cattle</span><span class="av-tag"><span class="av-key">Audio</span> Cattle</span><i class="fas fa-check av-mark" aria-label="match"></i></div>
+            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Cattle</span><span class="av-rel" role="img" aria-label="matches">=</span><span class="av-tag"><span class="av-key">Audio</span> Cattle</span></div>
           </div>
         </div>
       </div>
@@ -336,7 +336,7 @@
               </video>
             </div>
             <p class="pair-label">Base</p>
-            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Guitar</span><span class="av-tag"><span class="av-key">Audio</span> Organ</span><i class="fas fa-times av-mark" aria-label="mismatch"></i></div>
+            <div class="av-tags mismatch"><span class="av-tag"><span class="av-key">Video</span> Guitar</span><span class="av-rel" role="img" aria-label="does not match">&ne;</span><span class="av-tag"><span class="av-key">Audio</span> Organ</span></div>
           </div>
           <div class="column has-text-centered">
             <div class="pair-video-box">
@@ -345,7 +345,7 @@
               </video>
             </div>
             <p class="pair-label is-ours">+ JointREPA (Ours)</p>
-            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Guitar</span><span class="av-tag"><span class="av-key">Audio</span> Guitar</span><i class="fas fa-check av-mark" aria-label="match"></i></div>
+            <div class="av-tags match"><span class="av-tag"><span class="av-key">Video</span> Guitar</span><span class="av-rel" role="img" aria-label="matches">=</span><span class="av-tag"><span class="av-key">Audio</span> Guitar</span></div>
           </div>
         </div>
       </div>
