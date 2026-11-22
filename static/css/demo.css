@@ -270,7 +270,7 @@ table.prompt-levels .blank {
 }
 
 .pair-label.is-ours {
-  color: hsl(204, 86%, 53%);
+  color: #8E6FD5;               /* the paper's purple (same as .hl-purple), user 2026-11-22 */
 }
 
 h3.title.is-4 {
