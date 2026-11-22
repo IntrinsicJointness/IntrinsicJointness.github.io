@@ -12,16 +12,23 @@ html { scroll-behavior: smooth; }
   padding-bottom: 2rem;
 }
 
+/* Two widths, as in the two-column paper: full container width for figure* / table* floats, one shared narrower
+   width for one-column floats (Fig. 1, Table 3, Figs. 7, 8); the tall method figure a bit narrower. The caption
+   always spans exactly the width of its figure / table. */
 .paper-figure {
-  margin: 0.75rem auto 2rem;
+  margin: 0.75rem auto 2.25rem;
   width: 100%;
 }
-.paper-figure.w85 { width: 72%; }     /* Fig. 1 (~650 px) */
-.paper-figure.w55 { width: 48%; }     /* method figure (~440 px) */
-.paper-figure.w60 { width: 55%; }     /* single-column plots (Figs. 7, 8) */
+.paper-figure.single { width: 62%; }     /* ~595 px on desktop */
+.paper-figure.method { width: 50%; }     /* ~480 px */
+
+/* subsection = heading + item; a one-column item's block takes the item width so the heading lines up with it */
+.paper-sub { margin: 0 auto; width: 100%; }
+.paper-sub.single { width: 62%; }
+.paper-sub.single .paper-figure.single { width: 100%; }
 
 @media screen and (max-width: 768px) {
-  .paper-figure.w85, .paper-figure.w55, .paper-figure.w60 { width: 100%; }
+  .paper-figure.single, .paper-figure.method, .paper-sub.single { width: 100%; }
 }
 
 .paper-figure img {
@@ -71,6 +78,7 @@ h3.title.is-4.paper-subtitle {
 }
 table.paper-table {
   border-collapse: collapse;
+  width: 100%;                 /* same width as the caption above it */
   margin: 0 auto;
   font-size: 0.82rem;
   font-variant-numeric: tabular-nums;
@@ -91,7 +99,10 @@ table.paper-table thead tr:first-child th { border-top: 2px solid #363636; }
 table.paper-table tr.last-head th { border-bottom: 1px solid #363636; }
 table.paper-table tbody tr:last-child td { border-bottom: 2px solid #363636; }
 table.paper-table tr.rule td { border-top: 1px solid #363636; }
-table.paper-table th.cmid { border-bottom: 1px solid #b5b5b5; }
+/* booktabs \cmidrule(lr): a rule under the group header, trimmed at both ends so neighbouring groups stay apart */
+table.paper-table th.cmid {
+  background: linear-gradient(#4a4a4a, #4a4a4a) center bottom / calc(100% - 14px) 1px no-repeat;
+}
 table.paper-table tr.ours td { background: rgb(242, 242, 255); }
 table.paper-table tr.tab-sec td { text-align: center; }
 
