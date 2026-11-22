@@ -306,3 +306,25 @@ h3.title.is-4 {
 @media screen and (max-width: 768px) {
   .paper-prose { width: 100%; }
 }
+
+/* ---- verbal definition of intrinsic jointness (paper intro), between the abstract and Fig. 1 ---- */
+.definition-box {
+  border-left: 4px solid #8E6FD5;
+  background: #F7F5FC;
+  border-radius: 0 6px 6px 0;
+  padding: 0.9rem 1.2rem;
+  margin: 0.25rem 0 0.5rem;
+  text-align: justify;
+}
+.definition-box p { margin: 0; }
+.definition-box p + p { margin-top: 0.45rem; }
+.definition-term {
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #363636;
+}
+.definition-example {
+  font-size: 0.92rem;
+  color: #4a4a4a;
+}
