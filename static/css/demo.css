@@ -1,33 +1,112 @@
 /* Additions on top of the Nerfies index.css; panels reuse the Nerfies interpolation-panel look. */
 html { scroll-behavior: smooth; }
 
-.teaser-image {
-  display: block;
-  width: 85%;            /* of the four-fifths column under the abstract (~640 px on desktop) */
-  margin: 0.5rem auto 0;
-}
-
 /* the abstract follows the title / link buttons directly */
 .abstract-section {
   padding-top: 0.5rem;
 }
 
-.method-image {
-  display: block;
-  width: 55%;
-  margin: 0.5rem auto 0;
+/* ---- paper figures (width of the figure = image + caption; container is ~912 px on desktop) ---- */
+.paper-section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
+
+.paper-figure {
+  margin: 0.75rem auto 2rem;
+  width: 100%;
+}
+.paper-figure.w85 { width: 72%; }     /* Fig. 1 (~650 px) */
+.paper-figure.w55 { width: 48%; }     /* method figure (~440 px) */
+.paper-figure.w60 { width: 55%; }     /* single-column plots (Figs. 7, 8) */
 
 @media screen and (max-width: 768px) {
-  .teaser-image, .method-image { width: 100%; }
+  .paper-figure.w85, .paper-figure.w55, .paper-figure.w60 { width: 100%; }
 }
 
-.method-caption {
-  margin-top: 1rem;
+.paper-figure img {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.results-intro {
-  padding-bottom: 0;
+.paper-caption {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-align: justify;
+  color: #4a4a4a;
+  margin-top: 0.6rem;
+}
+.paper-table-figure .paper-caption {
+  margin: 0 0 0.6rem;
+}
+.cap-num {
+  font-weight: 700;
+  color: #363636;
+}
+
+h3.title.is-4.paper-subtitle {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.hl-purple {
+  color: #8E6FD5;
+  background: #F1EEF9;
+  font-weight: 700;
+  font-style: italic;
+  padding: 0 0.15em;
+}
+.hl-green {
+  color: #257849;
+  background: #DEF3E7;
+  font-weight: 700;
+  font-style: italic;
+  padding: 0 0.15em;
+}
+
+/* ---- paper tables (booktabs look) ---- */
+.paper-table-wrap {
+  overflow-x: auto;
+}
+table.paper-table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+table.paper-table th,
+table.paper-table td {
+  padding: 0.22rem 0.5rem;
+  text-align: center;
+  white-space: nowrap;
+  border: none;
+  vertical-align: middle;
+}
+table.paper-table th:first-child,
+table.paper-table td:first-child {
+  text-align: left;
+}
+table.paper-table thead tr:first-child th { border-top: 2px solid #363636; }
+table.paper-table tr.last-head th { border-bottom: 1px solid #363636; }
+table.paper-table tbody tr:last-child td { border-bottom: 2px solid #363636; }
+table.paper-table tr.rule td { border-top: 1px solid #363636; }
+table.paper-table th.cmid { border-bottom: 1px solid #b5b5b5; }
+table.paper-table tr.ours td { background: rgb(242, 242, 255); }
+table.paper-table tr.tab-sec td { text-align: center; }
+
+/* Table 1 (L1 / L2 / L3 diagnostic prompts) */
+table.prompt-levels { min-width: 60%; }
+table.prompt-levels tr.tmpl td {
+  background: #f2f2f2;
+  text-align: left;
+  border-top: 1px solid #dbdbdb;
+}
+table.prompt-levels td.l1 { text-align: left; }
+table.prompt-levels .blank {
+  display: inline-block;
+  min-width: 1.5em;
+  border-bottom: 1px solid #4a4a4a;
 }
 
 .pair-panel {
