@@ -47,7 +47,6 @@
       <a class="navbar-item" href="#method">Method</a>
       <a class="navbar-item" href="#results">Results</a>
       <a class="navbar-item" href="#unsaidbench">Samples</a>
-      <a class="navbar-item" href="#additional">Additional Analysis</a>
       <a class="navbar-item" href="#BibTeX">BibTeX</a>
     </div>
   </div>
@@ -327,40 +326,6 @@
           </div>
         </div>
       </div>
-  </div>
-</section>
-
-<section class="section paper-section" id="additional">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Additional Analysis</h2>
-    <div class="paper-sub single">
-    <h3 class="title is-4 paper-subtitle">Ablations on fine-tuning loss</h3>
-    <figure class="paper-figure paper-table-figure single">
-      <figcaption class="paper-caption"><span class="cap-num">Table 3.</span> <b>Ablations of fine-tuning losses on JavisDiT++.</b> While the FM loss yields modest improvements and unimodal REPA provides larger gains, JointREPA achieves the best performance.</figcaption>
-      <div class="paper-table-wrap"><table class="paper-table"><thead><tr><th></th><th colspan="2" class="cmid">AV-Consistency</th><th colspan="2" class="cmid">AV-Synchrony</th></tr><tr class="last-head"><th>Model</th><th>AV-IB&uarr;</th><th>AVHScore&uarr;</th><th>JavisScore&uarr;</th><th>DeSync&darr;</th></tr></thead><tbody><tr class="rule tab-sec"><td colspan="5"><b>UNSAIDBench</b></td></tr><tr class="rule"><td>JavisDiT++</td><td>0.176</td><td>0.163</td><td>0.133</td><td><u>0.815</u></td></tr><tr><td>&emsp;+ FM loss</td><td>0.181</td><td>0.171</td><td>0.141</td><td>0.826</td></tr><tr><td>&emsp;+ Unimodal REPA</td><td><u>0.199</u></td><td><u>0.188</u></td><td><u>0.158</u></td><td>0.832</td></tr><tr class="ours"><td>&emsp;+ <b>JointREPA</b> (Ours)</td><td><b>0.207</b></td><td><b>0.196</b></td><td><b>0.164</b></td><td><b>0.804</b></td></tr><tr class="rule"><td>&emsp;+ BEATs JointREPA</td><td>0.213</td><td>0.201</td><td>0.170</td><td>0.818</td></tr><tr class="rule tab-sec"><td colspan="5"><b>JavisBench-mini</b></td></tr><tr class="rule"><td>JavisDiT++</td><td>0.200</td><td>0.182</td><td>0.157</td><td>0.784</td></tr><tr><td>&emsp;+ FM loss</td><td>0.204</td><td>0.187</td><td>0.160</td><td><b>0.780</b></td></tr><tr><td>&emsp;+ Unimodal REPA</td><td><u>0.215</u></td><td><u>0.199</u></td><td><u>0.174</u></td><td>0.787</td></tr><tr class="ours"><td>&emsp;+ <b>JointREPA</b> (Ours)</td><td><b>0.221</b></td><td><b>0.204</b></td><td><b>0.179</b></td><td><u>0.782</u></td></tr><tr class="rule"><td>&emsp;+ BEATs JointREPA</td><td>0.221</td><td>0.204</td><td>0.179</td><td>0.772</td></tr></tbody></table></div>
-    </figure>
-    </div>
-    <div class="paper-sub single">
-    <h3 class="title is-4 paper-subtitle">Ablations on hyperparameter selection</h3>
-    <figure class="paper-figure single">
-      <img src="./static/images/paper/lambda_cross.png" alt="Figure 7" loading="lazy"/>
-      <figcaption class="paper-caption"><span class="cap-num">Figure 7.</span> <b>Ablation on the cross-modal alignment weight &lambda;<sub>cross</sub></b>. All non-zero weights consistently improve over &lambda;<sub>cross</sub>=0, demonstrating robustness to &lambda;<sub>cross</sub>.</figcaption>
-    </figure>
-    </div>
-    <div class="paper-sub single">
-    <h3 class="title is-4 paper-subtitle">Comparison with other post-training methods</h3>
-    <figure class="paper-figure single">
-      <img src="./static/images/paper/av_grpo.png" alt="Figure 8" loading="lazy"/>
-      <figcaption class="paper-caption"><span class="cap-num">Figure 8.</span> <b>Comparison of JointREPA and AV-GRPO on LTX-2.3.</b> Despite relying on lightweight LoRA-based representation alignment rather than full-model reinforcement learning, JointREPA achieves comparable results with AV-GRPO.</figcaption>
-    </figure>
-    </div>
-    <div class="paper-sub ">
-    <h3 class="title is-4 paper-subtitle">Revisiting Q1, Q2, and Q3</h3>
-    <figure class="paper-figure ">
-      <img src="./static/images/paper/revisit.png" alt="Figure 9" loading="lazy"/>
-      <figcaption class="paper-caption"><span class="cap-num">Figure 9.</span> <b>Revisiting Q1, Q2 and Q3 after applying JointREPA.</b> (a) Q1. JointREPA improves all jointness metrics across specificity levels, peaking at L1—widening the Agreement margin over the shuffled baseline (0.11 &rarr; 0.17) and achieving larger average gains in AV-IB and AVHScore at lower specificity (L3 &lt; L2 &lt; L1). (b) Q2. Intermediate representation probing reveals a pronounced increase in L1 Agreement around the middle layers where JointREPA is applied. (c) JointREPA increases the follow rate under asymmetric prompting (relative to Both-L3) from 26% to 47% and from 70% to 75%. Together, these findings demonstrate that JointREPA effectively improves semantic jointness.</figcaption>
-    </figure>
-    </div>
   </div>
 </section>
 
