@@ -201,8 +201,17 @@ table.prompt-levels .blank {
 /* demo.js gives every prompt of a slider the height of the longest one, so the clips sit at the same place */
 .pair-prompt {
   font-style: italic;
-  margin-bottom: 0.25rem;
+  font-size: 0.9rem;            /* smaller than body text so the shared prompt box takes less room (user 2026-11-22) */
+  line-height: 1.45;
+  margin-bottom: 0.6rem;
   text-align: justify;
+}
+.pair-key {                     /* "Prompt" label in front of the prompt */
+  font-family: 'Google Sans', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  color: #363636;
+  margin-right: 0.25em;
 }
 
 /* every clip in the same 16:9 box (LTX-2.3 768x448 and JavisDiT++ 432x240 differ slightly), letterboxed */
