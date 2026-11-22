@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="./static/academicons/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="stylesheet" href="./static/css/demo.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <link rel="icon" href="./static/images/favicon.svg">
 
   <script src="./static/js/jquery-3.5.1.min.js"></script>
@@ -24,6 +25,9 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/demo.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="renderMath()"></script>
 </head>
 <body>
 
@@ -46,7 +50,7 @@
       <a class="navbar-item" href="#analysis">Analysis</a>
       <a class="navbar-item" href="#method">Method</a>
       <a class="navbar-item" href="#results">Results</a>
-      <a class="navbar-item" href="#unsaidbench">Samples</a>
+      <a class="navbar-item" href="#unsaidbench">Qualitative</a>
       <a class="navbar-item" href="#BibTeX">BibTeX</a>
     </div>
   </div>
@@ -114,23 +118,23 @@
 <section class="section paper-section" id="analysis">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Diagnosing Semantic Jointness</h2>
-    <div class="paper-sub ">
+    <div class="paper-sub auto" style="--w: 79%">
     <h3 class="title is-4 paper-subtitle">Q1. Do existing T2AV models exhibit semantic jointness?</h3>
-    <figure class="paper-figure ">
+    <figure class="paper-figure auto">
       <img src="./static/images/paper/prompt_specificity.png" alt="Figure 2" loading="lazy"/>
       <figcaption class="paper-caption"><span class="cap-num">Figure 2.</span> <b>Q1. Semantic jointness under varying prompt specificity.</b> We evaluate semantic consistency using three metrics (Agreement, AV-IB, and AVHScore) across different levels of prompt specificity. All metrics generally decrease as prompt specificity decreases (L3 &rarr; L2 &rarr; L1). At L1, Agreement scores for most models are close to the shuffled-pair baseline (marked by &times;), obtained by randomly pairing audio and video generated with different seeds under the same prompt. This suggests that current T2AV models exhibit limited semantic jointness.</figcaption>
     </figure>
     </div>
-    <div class="paper-sub ">
+    <div class="paper-sub auto" style="--w: 90%">
     <h3 class="title is-4 paper-subtitle">Q2. Does limited semantic jointness persist in internal representations?</h3>
-    <figure class="paper-figure ">
+    <figure class="paper-figure auto">
       <img src="./static/images/paper/representation_probe.png" alt="Figure 3" loading="lazy"/>
       <figcaption class="paper-caption"><span class="cap-num">Figure 3.</span> <b>Q2. Semantic jointness in internal representations.</b> We evaluate probe agreement across Transformer blocks (horizontal axis) at different generation steps and levels of prompt specificity. Probe agreement generally decreases as prompt specificity decreases (L3 &rarr; L2 &rarr; L1). At L1, probe agreement is close to the shuffled-pair baseline (dashed line). This suggests that limited semantic jointness is also reflected in the models' internal representations.</figcaption>
     </figure>
     </div>
-    <div class="paper-sub ">
+    <div class="paper-sub auto" style="--w: 100%">
     <h3 class="title is-4 paper-subtitle">Q3. How effective is AV-attention for semantic coordination?</h3>
-    <figure class="paper-figure ">
+    <figure class="paper-figure auto">
       <img src="./static/images/paper/avcut_follow.png" alt="Figure 4" loading="lazy"/>
       <figcaption class="paper-caption"><span class="cap-num">Figure 4.</span> <b>Q3. Analysis of the role of AV-attention in semantic coordination.</b> (a) Semantic consistency with and without AV-attention. Blocking AV-attention causes substantial drops across all metrics in the LTX family, while inducing only minor changes in the JavisDiT family. (b) Semantic identity following under asymmetric prompting (L3 for one modality, L1 for the other). For both model families, the L1-conditioned modality <i>m</i><sub>L1</sub> follows the target identity specified <b><i>z</i></b><sup>L3</sup> substantially less reliably than under symmetric L3 prompting (both-L3). Together, these findings suggest that AV-attention is not effectively utilized for semantic coordination.</figcaption>
     </figure>
@@ -141,11 +145,36 @@
 <section class="section paper-section" id="method">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Method</h2>
-
+    <div class="content has-text-justified paper-prose">
+      <p>Motivated by the findings in <a href="#analysis">our analysis</a>, we propose <b>JointREPA</b>, which extends REPA to T2AV generation. JointREPA aligns each modality's representation not only with target features from its own pretrained encoder, but also with those from the other modality. The former builds semantically rich representations that provide clearer signals for AV-attention to leverage, while the latter actively promotes cross-modal semantic exchange.</p>
+    </div>
     <figure class="paper-figure method">
       <img src="./static/images/paper/method.png" alt="Figure 5" loading="lazy"/>
       <figcaption class="paper-caption"><span class="cap-num">Figure 5.</span> <b>Overview of JointREPA.</b> JointREPA aligns each modality's features with pretrained encoder representations from both its own modality (unimodal alignment) and the other modality (cross-modal alignment).</figcaption>
     </figure>
+    <div class="content has-text-justified paper-prose">
+      <p>As illustrated in Figure 5, let \(h^a_{\ell}\) and \(h^v_{\ell}\) denote the pooled audio and video hidden states at layer \(\ell\), and \(r^a\) and \(r^v\) the target features from frozen pretrained encoders (CLAP for audio and V-JEPA for video). Each modality uses two MLP projectors, \(f_{\mathrm{uni}}\) and \(f_{\mathrm{cross}}\), to align its hidden states with the unimodal target and cross-modal counterpart, respectively. The unimodal (\(\mathcal{L}_{\mathrm{uni}}\)) and cross-modal (\(\mathcal{L}_{\mathrm{cross}}\)) alignment losses are formulated as:</p>
+      <div class="paper-eq">\[\begin{aligned}
+\mathcal{L}_{\mathrm{uni}}
+= -\mathbb{E}\Big[
+&amp;\operatorname{sim}\big(
+f_{\mathrm{uni}}^a(h^a_\ell), r^a\big)\\
+&amp;+\operatorname{sim}\big(
+f_{\mathrm{uni}}^v(h^v_\ell), r^v\big)
+\Big], \\[1ex]
+\mathcal{L}_{\mathrm{cross}}
+= -\mathbb{E}\Big[
+&amp;\operatorname{sim}\big(
+f_{\mathrm{cross}}^a(h^a_\ell), r^v\big)\\
+&amp;+\operatorname{sim}\big(
+f_{\mathrm{cross}}^v(h^v_\ell), r^a\big)
+\Big],
+\end{aligned}\]</div>
+      <p>where \(\mathrm{sim}(\cdot, \cdot)\) denotes a similarity function.</p>
+      <p>The overall training objective is</p>
+      <div class="paper-eq">\[\mathcal{L} = \mathcal{L}_{\mathrm{FM}} + \lambda_{\mathrm{uni}}\mathcal{L}_{\mathrm{uni}} + \lambda_{\mathrm{cross}}\mathcal{L}_{\mathrm{cross}},\]</div>
+      <p>where \(\mathcal{L}_{\mathrm{FM}}\) is the flow-matching loss, and \(\lambda_{\mathrm{uni}}\) and \(\lambda_{\mathrm{cross}}\) weight the alignment terms.</p>
+    </div>
   </div>
 </section>
 
@@ -159,30 +188,24 @@
       <div class="paper-table-wrap"><table class="paper-table"><thead><tr><th></th><th></th><th colspan="2" class="cmid">AV-Consistency</th><th colspan="2" class="cmid">AV-Synchrony</th><th colspan="4" class="cmid">Text-Consistency</th><th colspan="2" class="cmid">AV-Quality</th></tr><tr class="last-head"><th>Model</th><th>Size</th><th>AV-IB &uarr;</th><th>AVHScore &uarr;</th><th>JavisScore &uarr;</th><th>DeSync &darr;</th><th>TV-IB &uarr;</th><th>TA-IB &uarr;</th><th>CLIP &uarr;</th><th>CLAP &uarr;</th><th>VQ &uarr;</th><th>AQ &uarr;</th></tr></thead><tbody><tr class="rule tab-sec"><td colspan="12"><b>UNSAIDBench</b></td></tr><tr class="rule"><td>JavisDiT++</td><td>2.1B</td><td>0.176</td><td>0.163</td><td>0.133</td><td>0.815</td><td><b>0.180</b></td><td>0.138</td><td><b>0.313</b></td><td>0.343</td><td>1.455</td><td>4.595</td></tr><tr class="ours"><td>&emsp;+ <b>JointREPA</b></td><td>2.1B</td><td><b>0.207</b></td><td><b>0.196</b></td><td><b>0.164</b></td><td><b>0.804</b></td><td>0.174</td><td><b>0.163</b></td><td>0.310</td><td><b>0.369</b></td><td><b>1.655</b></td><td><b>4.628</b></td></tr><tr class="rule"><td>LTX-2.3</td><td>22B</td><td>0.244</td><td>0.236</td><td>0.209</td><td>0.468</td><td><b>0.173</b></td><td>0.101</td><td>0.298</td><td>0.287</td><td><b>2.354</b></td><td><b>5.050</b></td></tr><tr class="ours"><td>&emsp;+ <b>JointREPA</b></td><td>22B</td><td><b>0.302</b></td><td><b>0.288</b></td><td><b>0.261</b></td><td><b>0.440</b></td><td>0.169</td><td><b>0.124</b></td><td>0.298</td><td><b>0.327</b></td><td>2.256</td><td>4.852</td></tr><tr class="rule tab-sec"><td colspan="12"><b>JavisBench-mini</b></td></tr><tr class="rule"><td>JavisDiT++</td><td>2.1B</td><td>0.200</td><td>0.182</td><td>0.157</td><td>0.784</td><td><b>0.283</b></td><td>0.170</td><td>0.316</td><td>0.429</td><td>1.538</td><td><b>4.987</b></td></tr><tr class="ours"><td>&emsp;+ <b>JointREPA</b></td><td>2.1B</td><td><b>0.221</b></td><td><b>0.204</b></td><td><b>0.179</b></td><td><b>0.782</b></td><td>0.278</td><td><b>0.187</b></td><td>0.316</td><td><b>0.447</b></td><td><b>1.715</b></td><td>4.917</td></tr><tr class="rule"><td>LTX-2.3</td><td>22B</td><td>0.249</td><td>0.238</td><td>0.214</td><td><b>0.555</b></td><td><b>0.280</b></td><td>0.171</td><td><b>0.306</b></td><td>0.412</td><td><b>2.458</b></td><td><b>5.348</b></td></tr><tr class="ours"><td>&emsp;+ <b>JointREPA</b></td><td>22B</td><td><b>0.285</b></td><td><b>0.271</b></td><td><b>0.247</b></td><td>0.575</td><td>0.277</td><td><b>0.186</b></td><td>0.304</td><td><b>0.433</b></td><td>2.339</td><td>5.157</td></tr><tr class="rule tab-sec"><td colspan="12"><b>VerseBench</b></td></tr><tr class="rule"><td>JavisDiT++</td><td>2.1B</td><td>0.213</td><td>0.201</td><td>0.172</td><td><b>0.905</b></td><td><b>0.182</b></td><td>0.189</td><td><b>0.325</b></td><td>0.479</td><td>1.580</td><td><b>4.280</b></td></tr><tr class="ours"><td>&emsp;+ <b>JointREPA</b></td><td>2.1B</td><td><b>0.237</b></td><td><b>0.223</b></td><td><b>0.195</b></td><td>0.958</td><td>0.175</td><td><b>0.216</b></td><td>0.323</td><td><b>0.489</b></td><td><b>1.850</b></td><td>4.260</td></tr><tr class="rule"><td>LTX-2.3</td><td>22B</td><td>0.332</td><td>0.317</td><td>0.287</td><td>0.284</td><td><b>0.167</b></td><td>0.191</td><td>0.317</td><td>0.447</td><td><b>2.760</b></td><td><b>5.004</b></td></tr><tr class="ours"><td>&emsp;+ <b>JointREPA</b></td><td>22B</td><td><b>0.369</b></td><td><b>0.351</b></td><td><b>0.322</b></td><td><b>0.241</b></td><td>0.165</td><td><b>0.211</b></td><td>0.317</td><td><b>0.472</b></td><td>2.677</td><td>4.809</td></tr></tbody></table></div>
     </figure>
     </div>
-    <div class="paper-sub ">
-    <h3 class="title is-4 paper-subtitle">Qualitative results</h3>
-    <figure class="paper-figure ">
-      <img src="./static/images/paper/qual.jpg" alt="Figure 6" loading="lazy"/>
-      <figcaption class="paper-caption"><span class="cap-num">Figure 6.</span> <b>Qualitative results on UNSAIDBench.</b> Generated video frames and audio spectrograms from the base model (top) and its JointREPA variant (bottom). Given an <span class="hl-purple">underspecified shared factor</span> per prompt, the base model realizes different semantic identities in audio and video, whereas JointREPA converges on the same identity.</figcaption>
-    </figure>
-    </div>
   </div>
 </section>
 
 <section class="section paper-section" id="unsaidbench">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Samples on UNSAIDBench</h2>
+    <h2 class="title is-3 has-text-centered">Qualitative results</h2>
 
     <div class="content has-text-justified">
-      <p>UNSAIDBench (<b>UN</b>derspecified <b>S</b>emantics in <b>A</b>udio-v<b>ID</b>eo generation) adapts the complex, real-world prompts of JavisBench to inject one underspecified shared factor per prompt. Following the AudioSet ontology, fine-grained event identities are abstracted into their parent categories (for example, &ldquo;harp&rdquo; becomes &ldquo;musical instrument&rdquo; and &ldquo;cat&rdquo; becomes &ldquo;pet&rdquo;) while the surrounding context is kept intact. Each stream can resolve the underspecified factor on its own; intrinsic jointness requires both to resolve it the same way. The original JavisBench caption is shown in gray under each prompt.</p>
+      <p>UNSAIDBench (<b>UN</b>derspecified <b>S</b>emantics in <b>A</b>udio-v<b>ID</b>eo generation) adapts the complex, real-world prompts of JavisBench to inject one underspecified shared factor per prompt. Following the AudioSet ontology, fine-grained event identities are abstracted into their parent categories (for example, &ldquo;harp&rdquo; becomes &ldquo;musical instrument&rdquo; and &ldquo;cat&rdquo; becomes &ldquo;pet&rdquo;) while the surrounding context is kept intact. Each stream can resolve the underspecified factor on its own; intrinsic jointness requires both to resolve it the same way. The underspecified shared factor is <span class="hl-purple">highlighted</span> in each prompt.</p>
       <p>Each panel shows a clip from the base model (left) and from the same model post-trained with JointREPA (right). All clips have sound. <i class="fas fa-volume-up"></i> Turn on audio; starting one clip pauses the others.</p>
     </div>
     
-    <h3 class="title is-4">LTX-2.3</h3>
-    
+    <h3 class="title is-4 pair-slider-title">LTX-2.3</h3>
+    <div class="pair-slider">
+      <div class="pair-track">
       <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;An elderly man in a striped shirt and glasses plays a musical instrument in what appears to be a shopping mall or a similar public space filled with arcade machines and electronic devices. The tiled floor and colorful arcade machines create a lively atmosphere. As he focuses on the notes, a slow-paced classical musical instrument piece in G major with soft, intricate melodies and rich chord progressions plays in the background. The lighting is bright and natural, typical of an indoor commercial area. In the distance, kids can be heard talking by the door in English.&rdquo;</p>
-        <p class="pair-orig">Original: &ldquo;An elderly man in a striped shirt and glasses plays a digital piano in what appears to be a shopping mall or a similar public space filled with arcade machines and electronic devices. The tiled floor and colorful arcade machines create a lively atmosphere. As he focuses on the keys, a slow-paced classical piano piece in G major with soft, intricate melodies and rich chord progressions plays in the background. The lighting is bright and natural, typical of an indoor commercial area. In the distance, kids can be heard talking by the door in English.&rdquo;</p>
+        <p class="pair-prompt">&ldquo;An elderly man in a striped shirt and glasses plays a <span class="hl-purple">musical instrument</span> in what appears to be a shopping mall or a similar public space filled with arcade machines and electronic devices. The tiled floor and colorful arcade machines create a lively atmosphere. As he focuses on the notes, a slow-paced classical <span class="hl-purple">musical instrument</span> piece in G major with soft, intricate melodies and rich chord progressions plays in the background. The lighting is bright and natural, typical of an indoor commercial area. In the distance, kids can be heard talking by the door in English.&rdquo;</p>
+        
         <div class="columns is-mobile is-variable is-2 pair-videos">
           <div class="column has-text-centered">
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/ltx/A7FgPWoRZZY_scene-0__instrument_base.jpg">
@@ -199,8 +222,8 @@
         </div>
       </div>
       <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;Two pets sit on a concrete surface, with one of them vocalizing at various intervals, ranging from loud and fierce to smaller, more subdued calls, interspersed with calls.&rdquo;</p>
-        <p class="pair-orig">Original: &ldquo;Two dogs sit on a concrete surface, with one of them barking at various intervals, ranging from loud and fierce to smaller, more subdued barks, interspersed with growls.&rdquo;</p>
+        <p class="pair-prompt">&ldquo;Two <span class="hl-purple">pets</span> sit on a concrete surface, with one of them vocalizing at various intervals, ranging from loud and fierce to smaller, more subdued calls, interspersed with calls.&rdquo;</p>
+        
         <div class="columns is-mobile is-variable is-2 pair-videos">
           <div class="column has-text-centered">
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/ltx/IOUp7EMIsjg_scene-0__pet_base.jpg">
@@ -217,8 +240,8 @@
         </div>
       </div>
       <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person plays a mellow musical instrument melody in a room with a checkered wall, wearing a gray t-shirt and striped pants. Multiple musical instruments are visible in the background, including a blue one. The performance is passionate and emotional, despite the noisy, low-quality mono recording. The musician&#x27;s hands move up and down the notes of the musical instrument, creating a bright and intimate atmosphere, possibly in a music studio or practice room.&rdquo;</p>
-        <p class="pair-orig">Original: &ldquo;A person plays a mellow harp melody in a room with a checkered wall, wearing a gray t-shirt and striped pants. Multiple harps are visible in the background, including a blue one. The performance is passionate and emotional, despite the noisy, low-quality mono recording. The musician&#x27;s hands move up and down the strings of the harp, creating a bright and intimate atmosphere, possibly in a music studio or practice room.&rdquo;</p>
+        <p class="pair-prompt">&ldquo;A person plays a mellow <span class="hl-purple">musical instrument</span> melody in a room with a checkered wall, wearing a gray t-shirt and striped pants. Multiple <span class="hl-purple">musical instruments</span> are visible in the background, including a blue one. The performance is passionate and emotional, despite the noisy, low-quality mono recording. The musician&#x27;s hands move up and down the notes of the <span class="hl-purple">musical instrument</span>, creating a bright and intimate atmosphere, possibly in a music studio or practice room.&rdquo;</p>
+        
         <div class="columns is-mobile is-variable is-2 pair-videos">
           <div class="column has-text-centered">
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/ltx/6FGn6JbLjaw_423000_433000__instrument_base.jpg">
@@ -235,8 +258,8 @@
         </div>
       </div>
       <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A pet with a grayish coat and darker stripes, sitting on a windowsill in what appears to be a residential indoor setting, vocalizes loudly at various intervals while looking out of the window. The wall behind the pet is textured, and the natural lighting suggests it is daytime.&rdquo;</p>
-        <p class="pair-orig">Original: &ldquo;A cat with a grayish coat and darker stripes, sitting on a windowsill in what appears to be a residential indoor setting, meows loudly at various intervals while looking out of the window. The wall behind the cat is textured, and the natural lighting suggests it is daytime.&rdquo;</p>
+        <p class="pair-prompt">&ldquo;A <span class="hl-purple">pet</span> with a grayish coat and darker stripes, sitting on a windowsill in what appears to be a residential indoor setting, vocalizes loudly at various intervals while looking out of the window. The wall behind the <span class="hl-purple">pet</span> is textured, and the natural lighting suggests it is daytime.&rdquo;</p>
+        
         <div class="columns is-mobile is-variable is-2 pair-videos">
           <div class="column has-text-centered">
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/ltx/3-HTO6MSe-U__pet_base.jpg">
@@ -252,11 +275,20 @@
           </div>
         </div>
       </div>
-    <h3 class="title is-4">JavisDiT++</h3>
-    
+      </div>
+      <div class="slider-nav">
+        <button class="slider-btn slider-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-dot is-active" aria-label="Sample 1"></button><button class="slider-dot" aria-label="Sample 2"></button><button class="slider-dot" aria-label="Sample 3"></button><button class="slider-dot" aria-label="Sample 4"></button>
+        <span class="slider-count">1 / 4</span>
+        <button class="slider-btn slider-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+    <h3 class="title is-4 pair-slider-title">JavisDiT++</h3>
+    <div class="pair-slider">
+      <div class="pair-track">
       <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person sits on a couch in a living room, playing an acoustic guitar. They are wearing a white t-shirt and have blonde hair. The room feels cozy, with a plaid-patterned blanket on the couch and a poster on the wall. As they play, they speak in English about four chord songs, their tone neutral and their pace slow.&rdquo;</p>
-        <p class="pair-orig">Original: &ldquo;A man sits on a couch in a living room, playing an acoustic guitar. He is wearing a white t-shirt and has blonde hair. The room feels cozy, with a plaid-patterned blanket on the couch and a poster on the wall. As he plays, he speaks in English about four chord songs, his tone neutral and his pace slow.&rdquo;</p>
+        <p class="pair-prompt">&ldquo;A <span class="hl-purple">person</span> sits on a couch in a living room, playing an acoustic guitar. They are wearing a white t-shirt and have blonde hair. The room feels cozy, with a plaid-patterned blanket on the couch and a poster on the wall. As they play, they speak in English about four chord songs, their tone neutral and their pace slow.&rdquo;</p>
+        
         <div class="columns is-mobile is-variable is-2 pair-videos">
           <div class="column has-text-centered">
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/javis/xGeqjlPz4kw_4__person_base.jpg">
@@ -273,8 +305,8 @@
         </div>
       </div>
       <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A pet with brown markings, wearing a strap, runs quickly through a dense forest filled with tall trees and green foliage. The air is filled with the sounds of pets vocalizing and snarling. Fallen logs covered in moss lie scattered on the ground. It is daytime, and the natural light filters through the trees.&rdquo;</p>
-        <p class="pair-orig">Original: &ldquo;An angry white dog with brown markings, wearing a collar, runs quickly through a dense forest filled with tall trees and green foliage. The air is filled with the sounds of dogs barking and snarling. Fallen logs covered in moss lie scattered on the ground. It is daytime, and the natural light filters through the trees.&rdquo;</p>
+        <p class="pair-prompt">&ldquo;A <span class="hl-purple">pet</span> with brown markings, wearing a strap, runs quickly through a dense forest filled with tall trees and green foliage. The air is filled with the sounds of <span class="hl-purple">pets</span> vocalizing and snarling. Fallen logs covered in moss lie scattered on the ground. It is daytime, and the natural light filters through the trees.&rdquo;</p>
+        
         <div class="columns is-mobile is-variable is-2 pair-videos">
           <div class="column has-text-centered">
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/javis/8UDyVHG13-0_scene-6__pet_base.jpg">
@@ -291,8 +323,8 @@
         </div>
       </div>
       <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A group of farm animals and farm animal graze on a green hillside, their woolly coats in shades of white and brown visible against the backdrop of a tree with bare branches and a fence in the distance. The farm animal call softly, adding to the serene atmosphere of the scene under a clear sky.&rdquo;</p>
-        <p class="pair-orig">Original: &ldquo;A group of sheep and lambs graze on a green hillside, their woolly coats in shades of white and brown visible against the backdrop of a tree with bare branches and a fence in the distance. The sheep bleat softly, adding to the serene atmosphere of the scene under a clear sky.&rdquo;</p>
+        <p class="pair-prompt">&ldquo;A group of <span class="hl-purple">farm animals</span> and <span class="hl-purple">farm animal</span> graze on a green hillside, their woolly coats in shades of white and brown visible against the backdrop of a tree with bare branches and a fence in the distance. The <span class="hl-purple">farm animal</span> call softly, adding to the serene atmosphere of the scene under a clear sky.&rdquo;</p>
+        
         <div class="columns is-mobile is-variable is-2 pair-videos">
           <div class="column has-text-centered">
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/javis/aMBjP6r-1Xo_scene-2__farm_base.jpg">
@@ -309,8 +341,8 @@
         </div>
       </div>
       <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A man is playing the musical instrument outdoors in front of a modern building with large glass windows reflecting the surroundings. He is wearing a white shirt and dark pants, standing on a paved area with greenery in the background. The music he is playing is a melodic instrumental piece in C major with a tempo of 125 BPM, featuring a musical instrument over chords like F major, G major, and A minor. The piece has a 4/4 time signature and a complex chord progression.&rdquo;</p>
-        <p class="pair-orig">Original: &ldquo;A man is playing the saxophone outdoors in front of a modern building with large glass windows reflecting the surroundings. He is wearing a white shirt and dark pants, standing on a paved area with greenery in the background. The music he is playing is a melodic instrumental piece in C major with a tempo of 125 BPM, featuring a saxophone over chords like F major, G major, and A minor. The piece has a 4/4 time signature and a complex chord progression.&rdquo;</p>
+        <p class="pair-prompt">&ldquo;A man is playing the <span class="hl-purple">musical instrument</span> outdoors in front of a modern building with large glass windows reflecting the surroundings. He is wearing a white shirt and dark pants, standing on a paved area with greenery in the background. The music he is playing is a melodic instrumental piece in C major with a tempo of 125 BPM, featuring a <span class="hl-purple">musical instrument</span> over chords like F major, G major, and A minor. The piece has a 4/4 time signature and a complex chord progression.&rdquo;</p>
+        
         <div class="columns is-mobile is-variable is-2 pair-videos">
           <div class="column has-text-centered">
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/javis/TWh_0KqZFMw_scene-0__instrument_base.jpg">
@@ -326,6 +358,14 @@
           </div>
         </div>
       </div>
+      </div>
+      <div class="slider-nav">
+        <button class="slider-btn slider-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-dot is-active" aria-label="Sample 1"></button><button class="slider-dot" aria-label="Sample 2"></button><button class="slider-dot" aria-label="Sample 3"></button><button class="slider-dot" aria-label="Sample 4"></button>
+        <span class="slider-count">1 / 4</span>
+        <button class="slider-btn slider-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
   </div>
 </section>
 

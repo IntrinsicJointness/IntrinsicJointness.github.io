@@ -26,9 +26,11 @@ html { scroll-behavior: smooth; }
 .paper-sub { margin: 0 auto; width: 100%; }
 .paper-sub.single { width: 62%; }
 .paper-sub.single .paper-figure.single { width: 100%; }
+/* "auto": width from the builder (--w) so Q1-Q3 figures show their text at about the same size */
+.paper-sub.auto { width: var(--w, 100%); }
 
 @media screen and (max-width: 768px) {
-  .paper-figure.single, .paper-figure.method, .paper-sub.single { width: 100%; }
+  .paper-figure.single, .paper-figure.method, .paper-sub.single, .paper-sub.auto { width: 100%; }
 }
 
 .paper-figure img {
@@ -55,6 +57,10 @@ html { scroll-behavior: smooth; }
 h3.title.is-4.paper-subtitle {
   margin-top: 2rem;
   margin-bottom: 0.75rem;
+  text-align: center;          /* blocks have different widths (Q1-Q3): centred headings keep one axis */
+}
+.pair-slider-title {
+  text-align: center;
 }
 
 .hl-purple {
@@ -127,6 +133,61 @@ table.prompt-levels .blank {
   margin-bottom: 1.5rem;
 }
 
+/* ---- horizontal pair slider: one pair per slide, swipe / arrows / dots ---- */
+.pair-slider {
+  margin-bottom: 2.5rem;
+}
+.pair-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  border-radius: 10px;
+}
+.pair-track::-webkit-scrollbar { display: none; }
+.pair-track > .pair-panel {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  margin-bottom: 0;
+}
+.slider-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.8rem;
+}
+.slider-btn {
+  border: none;
+  background: #363636;
+  color: #fff;
+  border-radius: 50%;
+  width: 2.2rem;
+  height: 2.2rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.slider-btn:hover { background: #4a4a4a; }
+.slider-dot {
+  border: none;
+  padding: 0;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: #dbdbdb;
+  cursor: pointer;
+}
+.slider-dot.is-active { background: #363636; }
+.slider-count {
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.85rem;
+  color: #7a7a7a;
+  min-width: 2.8rem;
+  text-align: center;
+}
+
 .pair-prompt {
   font-style: italic;
   margin-bottom: 0.25rem;
@@ -163,4 +224,18 @@ table.prompt-levels .blank {
 
 h3.title.is-4 {
   margin-top: 1.5rem;
+}
+
+/* ---- method prose (paper sec. 4) ---- */
+.paper-prose {
+  width: 80%;
+  margin: 0 auto;
+}
+.paper-prose .paper-eq {
+  margin: 0.75rem 0 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+@media screen and (max-width: 768px) {
+  .paper-prose { width: 100%; }
 }
