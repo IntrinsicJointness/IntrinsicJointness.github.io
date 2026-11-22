@@ -1,0 +1,65 @@
+/* Additions on top of the Nerfies index.css; panels reuse the Nerfies interpolation-panel look. */
+html { scroll-behavior: smooth; }
+
+.teaser-image {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.method-image {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.method-caption {
+  margin-top: 1rem;
+}
+
+.results-intro {
+  padding-bottom: 0;
+}
+
+.pair-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 1rem 1.25rem 0.5rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.pair-prompt {
+  font-style: italic;
+  margin-bottom: 0.25rem;
+  text-align: justify;
+}
+
+.pair-orig {
+  color: #7a7a7a;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+  text-align: justify;
+}
+
+.pair-videos {
+  margin-top: 0.25rem;
+}
+
+.pair-panel video {
+  width: 100%;
+  border-radius: 5px;
+  display: block;
+  background: #000;
+}
+
+.pair-label {
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 600;
+  margin-top: 0.35rem;
+}
+
+.pair-label.is-ours {
+  color: hsl(204, 86%, 53%);
+}
+
+h3.title.is-4 {
+  margin-top: 1.5rem;
+}
