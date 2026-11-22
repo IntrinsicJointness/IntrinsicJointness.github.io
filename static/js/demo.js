@@ -77,7 +77,18 @@ document.addEventListener('DOMContentLoaded', function() {
     dots.forEach(function(d, k) { d.addEventListener('click', function() { go(k); }); });
     var t = null;
     track.addEventListener('scroll', function() { clearTimeout(t); t = setTimeout(update, 80); });
-    window.addEventListener('resize', function() { track.scrollLeft = cur * track.clientWidth; });
+    // every slide reserves the height of the longest prompt, so the clips start at the same place on every slide
+    function equalize() {
+      var ps = sl.querySelectorAll('.pair-prompt');
+      ps.forEach(function(p) { p.style.minHeight = ''; });
+      var h = 0;
+      ps.forEach(function(p) { h = Math.max(h, p.getBoundingClientRect().height); });
+      ps.forEach(function(p) { p.style.minHeight = Math.ceil(h) + 'px'; });
+    }
+    equalize();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(equalize);
+    window.addEventListener('load', equalize);
+    window.addEventListener('resize', function() { equalize(); track.scrollLeft = cur * track.clientWidth; });
   });
 });
 

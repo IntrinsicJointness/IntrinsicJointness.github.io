@@ -188,11 +188,62 @@ table.prompt-levels .blank {
   text-align: center;
 }
 
+/* model name on top of each slide (one slider for LTX-2.3 and JavisDiT++) */
+.pair-model {
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-align: center;
+  color: #363636;
+  margin-bottom: 0.4rem;
+}
+
+/* demo.js gives every prompt of a slider the height of the longest one, so the clips sit at the same place */
 .pair-prompt {
   font-style: italic;
   margin-bottom: 0.25rem;
   text-align: justify;
 }
+
+/* every clip in the same 16:9 box (LTX-2.3 768x448 and JavisDiT++ 432x240 differ slightly), letterboxed */
+.pair-video-box {
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.pair-panel .pair-video-box video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+/* Video / Audio tags under each clip: green = the two streams agree, red = they do not */
+.av-tags {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+}
+.av-tag {
+  padding: 0.05rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.av-key {
+  font-weight: 400;
+  opacity: 0.8;
+  margin-right: 0.15rem;
+}
+.av-tags.match .av-tag, .av-inline.match { color: #257849; background: #DEF3E7; }
+.av-tags.mismatch .av-tag, .av-inline.mismatch { color: #B03A2E; background: #FBE5E1; }
+.av-tags.match .av-mark { color: #257849; }
+.av-tags.mismatch .av-mark { color: #B03A2E; }
+.av-inline { padding: 0 0.3em; border-radius: 3px; font-weight: 600; }
 
 .pair-orig {
   color: #7a7a7a;
