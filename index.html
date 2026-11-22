@@ -2,10 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="AV-REPA: representation alignment for semantic jointness in joint audio-video generation.">
-  <meta name="keywords" content="audio-video generation, joint generation, semantic jointness, REPA, AV-REPA">
+  <meta name="description" content="JointREPA: representation alignment-based post-training for intrinsic jointness in joint audio-video generation.">
+  <meta name="keywords" content="audio-video generation, joint generation, intrinsic jointness, REPA, JointREPA, UNSAIDBench">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Beyond Co-Generation: Rethinking Semantic Jointness in Audio-Video Generation</title>
+  <title>Beyond Co-Generation: Rethinking Jointness in Joint Audio-Video Generation</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -48,10 +48,7 @@
           Results
         </a>
         <div class="navbar-dropdown">
-          <a class="navbar-item" href="#underspecified">Underspecified Prompts</a>
-          <a class="navbar-item" href="#savisbench">SavisBench</a>
-          <a class="navbar-item" href="#javisbench">JavisBench</a>
-          <a class="navbar-item" href="#audioset">AudioSet Captions, Underspecified</a>
+          <a class="navbar-item" href="#unsaidbench">UNSAIDBench</a>
         </div>
       </div>
     </div>
@@ -65,7 +62,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Beyond Co-Generation: Rethinking Semantic Jointness in Audio&ndash;Video Generation</h1>
+          <h1 class="title is-1 publication-title">Beyond Co-Generation: Rethinking Jointness in Joint Audio&ndash;Video Generation</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">Jihoo Jung,</span>
             <span class="author-block">Ji-Hoon Kim,</span>
@@ -112,7 +109,7 @@
                   <span class="icon">
                       <i class="far fa-images"></i>
                   </span>
-                  <span>SavisBench</span>
+                  <span>UNSAIDBench</span>
                   </a>
               </span>
             </div>
@@ -127,10 +124,9 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src="./static/images/teaser.png" class="teaser-image" alt="Semantic jointness under specific and underspecified prompts."/>
+      <img src="./static/images/teaser.png" class="teaser-image" alt="Intrinsic jointness under detailed and underspecified prompts."/>
       <h2 class="subtitle has-text-centered">
-        <b>Semantic jointness.</b> Underspecified prompts require audio and video to consistently resolve
-        semantic details not specified by text.
+        <b>Intrinsic jointness.</b> Under detailed prompts, output consistency can arise from each modality independently following the text prompt alone, without audio&ndash;visual interaction. In contrast, underspecified prompts enable disentangling whether this consistency stems from mere prompt following or genuine audio&ndash;visual coordination. We define intrinsic jointness as the ability to maintain consistency under such underspecified prompts.
       </h2>
     </div>
   </div>
@@ -142,51 +138,51 @@
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
         <div class="item item-0">
-          <video poster="static/posters/javisbench/ltx/mBY68kFvhq8_scene-6_ours.jpg" id="car-0" autoplay controls muted loop playsinline height="100%"
-                 title="In a dimly lit gym with the words &quot;HAMMER STRENGTH&quot; prominently displayed on the wall, there is music playing in the background. Some gym equipment and a couch can be seen in the background, adding to the moody atmosphere.">
-            <source src="static/videos/javisbench/ltx/mBY68kFvhq8_scene-6_ours.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-1">
-          <video poster="static/posters/uvisbench/ltx/A7FgPWoRZZY_scene-0__instrument_ours.jpg" id="car-1" autoplay controls muted loop playsinline height="100%"
+          <video poster="static/posters/uvisbench/ltx/A7FgPWoRZZY_scene-0__instrument_ours.jpg" id="car-0" autoplay controls muted loop playsinline height="100%"
                  title="An elderly man in a striped shirt and glasses plays a musical instrument in what appears to be a shopping mall or a similar public space filled with arcade machines and electronic devices. The tiled floor and colorful arcade machines create a lively atmosphere. As he focuses on the notes, a slow-paced classical musical instrument piece in G major with soft, intricate melodies and rich chord progressions plays in the background. The lighting is bright and natural, typical of an indoor commercial area. In the distance, kids can be heard talking by the door in English.">
             <source src="static/videos/uvisbench/ltx/A7FgPWoRZZY_scene-0__instrument_ours.mp4" type="video/mp4">
           </video>
         </div>
+        <div class="item item-1">
+          <video poster="static/posters/uvisbench/ltx/IOUp7EMIsjg_scene-0__pet_ours.jpg" id="car-1" autoplay controls muted loop playsinline height="100%"
+                 title="Two pets sit on a concrete surface, with one of them vocalizing at various intervals, ranging from loud and fierce to smaller, more subdued calls, interspersed with calls.">
+            <source src="static/videos/uvisbench/ltx/IOUp7EMIsjg_scene-0__pet_ours.mp4" type="video/mp4">
+          </video>
+        </div>
         <div class="item item-2">
-          <video poster="static/posters/javisbench/ltx/aSgzGiO2Gmo_scene-0_ours.jpg" id="car-2" autoplay controls muted loop playsinline height="100%"
-                 title="A white dog with a slightly open mouth, its tongue hanging out, is barking and growling while looking to the side. The background is blurred, suggesting an outdoor setting with grass.">
-            <source src="static/videos/javisbench/ltx/aSgzGiO2Gmo_scene-0_ours.mp4" type="video/mp4">
+          <video poster="static/posters/uvisbench/ltx/6FGn6JbLjaw_423000_433000__instrument_ours.jpg" id="car-2" autoplay controls muted loop playsinline height="100%"
+                 title="A person plays a mellow musical instrument melody in a room with a checkered wall, wearing a gray t-shirt and striped pants. Multiple musical instruments are visible in the background, including a blue one. The performance is passionate and emotional, despite the noisy, low-quality mono recording. The musician&#x27;s hands move up and down the notes of the musical instrument, creating a bright and intimate atmosphere, possibly in a music studio or practice room.">
+            <source src="static/videos/uvisbench/ltx/6FGn6JbLjaw_423000_433000__instrument_ours.mp4" type="video/mp4">
           </video>
         </div>
         <div class="item item-3">
-          <video poster="static/posters/javisbench/ltx/1dfpg3dNqvs_scene-0_ours.jpg" id="car-3" autoplay controls muted loop playsinline height="100%"
-                 title="A large whale breaches the surface of the ocean, starting partially submerged before lifting its body out of the water, creating a big splash and a cloud of white foam. The water splashes and gurgles as the whale moves through the air, making a whooshing sound, and then splashes back into the water. The whale&#x27;s body is dark gray with some lighter patches, and its tail is visible as it comes out of the water.">
-            <source src="static/videos/javisbench/ltx/1dfpg3dNqvs_scene-0_ours.mp4" type="video/mp4">
+          <video poster="static/posters/uvisbench/ltx/3-HTO6MSe-U__pet_ours.jpg" id="car-3" autoplay controls muted loop playsinline height="100%"
+                 title="A pet with a grayish coat and darker stripes, sitting on a windowsill in what appears to be a residential indoor setting, vocalizes loudly at various intervals while looking out of the window. The wall behind the pet is textured, and the natural lighting suggests it is daytime.">
+            <source src="static/videos/uvisbench/ltx/3-HTO6MSe-U__pet_ours.mp4" type="video/mp4">
           </video>
         </div>
         <div class="item item-4">
-          <video poster="static/posters/javisbench/ltx/4_IPYhQbB8w_ours.jpg" id="car-4" autoplay controls muted loop playsinline height="100%"
-                 title="A person is riding a light brown horse with darker patches in an outdoor arena. The horse&#x27;s hooves can be heard hitting the ground as they move around the arena. The rider is wearing a dark outfit, and there are white fences surrounding the sandy ground. Trees and a building are visible in the background.">
-            <source src="static/videos/javisbench/ltx/4_IPYhQbB8w_ours.mp4" type="video/mp4">
+          <video poster="static/posters/uvisbench/javis/xGeqjlPz4kw_4__person_ours.jpg" id="car-4" autoplay controls muted loop playsinline height="100%"
+                 title="A person sits on a couch in a living room, playing an acoustic guitar. They are wearing a white t-shirt and have blonde hair. The room feels cozy, with a plaid-patterned blanket on the couch and a poster on the wall. As they play, they speak in English about four chord songs, their tone neutral and their pace slow.">
+            <source src="static/videos/uvisbench/javis/xGeqjlPz4kw_4__person_ours.mp4" type="video/mp4">
           </video>
         </div>
         <div class="item item-5">
-          <video poster="static/posters/javisbench/ltx/3XMciegGpGo_scene-0_ours.jpg" id="car-5" autoplay controls muted loop playsinline height="100%"
-                 title="A woman is performing a live street show, standing on a stage with a microphone and musical equipment. She is wearing a white top and patterned pants. In the background, a building with lights can be seen, along with people walking around and some plants and barriers on the street. Music plays in the background as she sings, and there are faint sounds of people walking and ambient noise from the street.">
-            <source src="static/videos/javisbench/ltx/3XMciegGpGo_scene-0_ours.mp4" type="video/mp4">
+          <video poster="static/posters/uvisbench/javis/8UDyVHG13-0_scene-6__pet_ours.jpg" id="car-5" autoplay controls muted loop playsinline height="100%"
+                 title="A pet with brown markings, wearing a strap, runs quickly through a dense forest filled with tall trees and green foliage. The air is filled with the sounds of pets vocalizing and snarling. Fallen logs covered in moss lie scattered on the ground. It is daytime, and the natural light filters through the trees.">
+            <source src="static/videos/uvisbench/javis/8UDyVHG13-0_scene-6__pet_ours.mp4" type="video/mp4">
           </video>
         </div>
         <div class="item item-6">
-          <video poster="static/posters/javisbench/ltx/fRi5D6GqFrk_scene-1_ours.jpg" id="car-6" autoplay controls muted loop playsinline height="100%"
-                 title="A stork is flying over a beach with a pink bag in its beak. The beach has a sandy shore, blue water, and some green hills in the background, with palm trees on the right side of the frame. Waves crash on the shore and birds chirp in the background.">
-            <source src="static/videos/javisbench/ltx/fRi5D6GqFrk_scene-1_ours.mp4" type="video/mp4">
+          <video poster="static/posters/uvisbench/javis/aMBjP6r-1Xo_scene-2__farm_ours.jpg" id="car-6" autoplay controls muted loop playsinline height="100%"
+                 title="A group of farm animals and farm animal graze on a green hillside, their woolly coats in shades of white and brown visible against the backdrop of a tree with bare branches and a fence in the distance. The farm animal call softly, adding to the serene atmosphere of the scene under a clear sky.">
+            <source src="static/videos/uvisbench/javis/aMBjP6r-1Xo_scene-2__farm_ours.mp4" type="video/mp4">
           </video>
         </div>
         <div class="item item-7">
-          <video poster="static/posters/javisbench/ltx/CNg9Z4aYwVI_scene-0_ours.jpg" id="car-7" autoplay controls muted loop playsinline height="100%"
-                 title="Three construction workers are on a site. One is in the foreground, wearing a yellow hard hat, a light blue shirt, and brown pants, holding a large hammer and working on something while hammering sounds can be heard. Another worker in the background is wearing a yellow hard hat and a red safety vest, holding a long metal rod. The third worker is partially visible, also in a yellow hard hat and red safety vest. Indistinct background noises from other construction activities or machinery can also be heard. They are all on a flat surface, possibly a construction site, with a blurred green background that looks like trees or bushes.">
-            <source src="static/videos/javisbench/ltx/CNg9Z4aYwVI_scene-0_ours.mp4" type="video/mp4">
+          <video poster="static/posters/uvisbench/javis/TWh_0KqZFMw_scene-0__instrument_ours.jpg" id="car-7" autoplay controls muted loop playsinline height="100%"
+                 title="A man is playing the musical instrument outdoors in front of a modern building with large glass windows reflecting the surroundings. He is wearing a white shirt and dark pants, standing on a paved area with greenery in the background. The music he is playing is a melodic instrumental piece in C major with a tempo of 125 BPM, featuring a musical instrument over chords like F major, G major, and A minor. The piece has a 4/4 time signature and a complex chord progression.">
+            <source src="static/videos/uvisbench/javis/TWh_0KqZFMw_scene-0__instrument_ours.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -203,13 +199,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Joint audio&ndash;video generation requires not only text following but also consistency between the two modalities. However, agreement under detailed prompts may arise simply from independent text following rather than genuine cross-modal coordination.
-          </p>
-          <p>
-            We introduce <i>intrinsic jointness</i>, the ability to consistently resolve semantic and temporal details left unspecified by text, and investigate its semantic dimension. Using underspecified prompts, we find that four recent joint generators, LTX-2.3 and JavisDiT++, exhibit substantial drops in semantic agreement. Further analysis reveals that this disagreement persists in internal representations, with joint- and cross-attention mechanisms failing to effectively coordinate semantic information across modalities.
-          </p>
-          <p>
-            To address this limitation, we propose <span class="dnerf">AV-REPA</span>, a simple representation alignment method that aligns each generative branch with both unimodal and paired cross-modal representations. Across two generative architectures, AV-REPA consistently improves performance semantic jointness on SAVISBench, our underspecified variant of JavisBench, while also improving overall cross-modal consistency on JavisBench and VerseBench.
+            Our aim is to advance the understanding of genuine audio-visual coordination in joint text-to-audio-video (T2AV) generation, with particular emphasis on semantic consistency. Evaluating audio-visual consistency in T2AV generation is nontrivial, as detailed text prompts obscure whether such consistency stems from genuine cross-modal coordination or merely from independent text following. To isolate the former, we introduce <i>intrinsic jointness</i>: the ability of audio and video to produce the same realization for details left underspecified by the prompt. Using semantically underspecified prompts (e.g., &ldquo;musical instrument playing&rdquo; rather than &ldquo;electric guitar playing&rdquo;), we investigate four recent models and reveal their limited intrinsic jointness. To address this limitation, we propose <span class="dnerf">JointREPA</span>, a simple representation alignment-based post-training method to facilitate cross-modal coordination. Since existing benchmarks use semantically detailed prompts, we introduce <b>UNSAIDBench</b>, a benchmark designed to evaluate intrinsic jointness under semantic underspecification. Experiments across two distinct models and three benchmarks, including UNSAIDBench, demonstrate that <span class="dnerf">JointREPA</span> consistently improves semantic consistency.
           </p>
         </div>
       </div>
@@ -220,10 +210,9 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Method</h2>
-        <img src="./static/images/method.png" class="method-image" alt="Overview of AV-REPA."/>
+        <img src="./static/images/method.png" class="method-image" alt="Overview of JointREPA."/>
         <div class="content has-text-justified method-caption">
-          <p><b>Overview of <span class="dnerf">AV-REPA</span>.</b> Unimodal and cross-modal representation
-          alignment encourage sample-specific semantic agreement.</p>
+          <p><b>Overview of <span class="dnerf">JointREPA</span>.</b> <span class="dnerf">JointREPA</span> aligns each modality's features with pretrained encoder representations from both its own modality (unimodal alignment) and the other modality (cross-modal alignment).</p>
         </div>
       </div>
     </div>
@@ -236,11 +225,11 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Base vs. <span class="dnerf">AV-REPA</span></h2>
+        <h2 class="title is-3">Base vs. <span class="dnerf">JointREPA</span></h2>
         <div class="content has-text-justified">
           <p>
-            Each panel shows a clip from the base model (left) and from the same model fine-tuned with
-            <span class="dnerf">AV-REPA</span> (right), for 37 prompts on LTX-2.3 and JavisDiT++.
+            Each panel shows a clip from the base model (left) and from the same model post-trained with
+            <span class="dnerf">JointREPA</span> (right), for 8 UNSAIDBench prompts on LTX-2.3 and JavisDiT++.
             All clips have sound. <i class="fas fa-volume-up"></i> Turn on audio; starting one clip pauses the others.
           </p>
         </div>
@@ -249,174 +238,13 @@
   </div>
 </section>
 
-<section class="section" id="underspecified">
+<section class="section" id="unsaidbench">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Underspecified Prompts</h2>
+        <h2 class="title is-3">UNSAIDBench</h2>
         <div class="content has-text-justified">
-          <p>Minimal prompts such as &ldquo;A person is playing a musical instrument.&rdquo; or &ldquo;A person is speaking.&rdquo; leave the instrument or the speaker unspecified. Each stream has to resolve this detail on its own, and the two streams have to resolve it in the same way.</p>
-        </div>
-        
-        <h3 class="title is-4">LTX-2.3</h3>
-        
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person is playing a musical instrument.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k007_base.jpg">
-              <source src="static/videos/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k007_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k007_ours.jpg">
-              <source src="static/videos/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k007_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person is playing a musical instrument.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k022_base.jpg">
-              <source src="static/videos/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k022_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k022_ours.jpg">
-              <source src="static/videos/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k022_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person is playing a musical instrument.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k018_base.jpg">
-              <source src="static/videos/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k018_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k018_ours.jpg">
-              <source src="static/videos/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k018_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person is playing a musical instrument.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k001_base.jpg">
-              <source src="static/videos/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k001_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k001_ours.jpg">
-              <source src="static/videos/diagnosing/ltx/L1_a_person_is_playing_a_musical_instrument_k001_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person is speaking.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/ltx/L1_a_person_is_speaking_k017_base.jpg">
-              <source src="static/videos/diagnosing/ltx/L1_a_person_is_speaking_k017_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/ltx/L1_a_person_is_speaking_k017_ours.jpg">
-              <source src="static/videos/diagnosing/ltx/L1_a_person_is_speaking_k017_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-        <h3 class="title is-4">JavisDiT++</h3>
-        
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person is speaking.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/javis/L1_a_person_is_speaking_k097_base.jpg">
-              <source src="static/videos/diagnosing/javis/L1_a_person_is_speaking_k097_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/javis/L1_a_person_is_speaking_k097_ours.jpg">
-              <source src="static/videos/diagnosing/javis/L1_a_person_is_speaking_k097_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person is playing a musical instrument.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/javis/L1_a_person_is_playing_a_musical_instrument_k006_base.jpg">
-              <source src="static/videos/diagnosing/javis/L1_a_person_is_playing_a_musical_instrument_k006_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/javis/L1_a_person_is_playing_a_musical_instrument_k006_ours.jpg">
-              <source src="static/videos/diagnosing/javis/L1_a_person_is_playing_a_musical_instrument_k006_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person is playing a musical instrument.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/javis/L1_a_person_is_playing_a_musical_instrument_k099_base.jpg">
-              <source src="static/videos/diagnosing/javis/L1_a_person_is_playing_a_musical_instrument_k099_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/diagnosing/javis/L1_a_person_is_playing_a_musical_instrument_k099_ours.jpg">
-              <source src="static/videos/diagnosing/javis/L1_a_person_is_playing_a_musical_instrument_k099_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="section" id="savisbench">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">SavisBench</h2>
-        <div class="content has-text-justified">
-          <p>SavisBench underspecifies JavisBench prompts: fine-grained event identities are replaced by their AudioSet parent categories (for example, &ldquo;chicken&rdquo; becomes &ldquo;farm animal&rdquo;) while the surrounding context is kept. The original JavisBench caption is shown in gray under each prompt.</p>
+          <p>UNSAIDBench (<b>UN</b>derspecified <b>S</b>emantics in <b>A</b>udio-v<b>ID</b>eo generation) adapts the complex, real-world prompts of JavisBench to inject one underspecified shared factor per prompt. Following the AudioSet ontology, fine-grained event identities are abstracted into their parent categories (for example, &ldquo;harp&rdquo; becomes &ldquo;musical instrument&rdquo; and &ldquo;cat&rdquo; becomes &ldquo;pet&rdquo;) while the surrounding context is kept intact. Each stream can resolve the underspecified factor on its own; intrinsic jointness requires both to resolve it the same way. The original JavisBench caption is shown in gray under each prompt.</p>
         </div>
         
         <h3 class="title is-4">LTX-2.3</h3>
@@ -435,7 +263,7 @@
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/ltx/A7FgPWoRZZY_scene-0__instrument_ours.jpg">
               <source src="static/videos/uvisbench/ltx/A7FgPWoRZZY_scene-0__instrument_ours.mp4" type="video/mp4">
             </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
+            <p class="pair-label is-ours">+ JointREPA (Ours)</p>
           </div>
         </div>
       </div>
@@ -453,7 +281,7 @@
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/ltx/IOUp7EMIsjg_scene-0__pet_ours.jpg">
               <source src="static/videos/uvisbench/ltx/IOUp7EMIsjg_scene-0__pet_ours.mp4" type="video/mp4">
             </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
+            <p class="pair-label is-ours">+ JointREPA (Ours)</p>
           </div>
         </div>
       </div>
@@ -471,7 +299,7 @@
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/ltx/6FGn6JbLjaw_423000_433000__instrument_ours.jpg">
               <source src="static/videos/uvisbench/ltx/6FGn6JbLjaw_423000_433000__instrument_ours.mp4" type="video/mp4">
             </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
+            <p class="pair-label is-ours">+ JointREPA (Ours)</p>
           </div>
         </div>
       </div>
@@ -489,7 +317,7 @@
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/ltx/3-HTO6MSe-U__pet_ours.jpg">
               <source src="static/videos/uvisbench/ltx/3-HTO6MSe-U__pet_ours.mp4" type="video/mp4">
             </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
+            <p class="pair-label is-ours">+ JointREPA (Ours)</p>
           </div>
         </div>
       </div>
@@ -509,7 +337,7 @@
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/javis/xGeqjlPz4kw_4__person_ours.jpg">
               <source src="static/videos/uvisbench/javis/xGeqjlPz4kw_4__person_ours.mp4" type="video/mp4">
             </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
+            <p class="pair-label is-ours">+ JointREPA (Ours)</p>
           </div>
         </div>
       </div>
@@ -527,7 +355,7 @@
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/javis/8UDyVHG13-0_scene-6__pet_ours.jpg">
               <source src="static/videos/uvisbench/javis/8UDyVHG13-0_scene-6__pet_ours.mp4" type="video/mp4">
             </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
+            <p class="pair-label is-ours">+ JointREPA (Ours)</p>
           </div>
         </div>
       </div>
@@ -545,7 +373,7 @@
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/javis/aMBjP6r-1Xo_scene-2__farm_ours.jpg">
               <source src="static/videos/uvisbench/javis/aMBjP6r-1Xo_scene-2__farm_ours.mp4" type="video/mp4">
             </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
+            <p class="pair-label is-ours">+ JointREPA (Ours)</p>
           </div>
         </div>
       </div>
@@ -563,417 +391,7 @@
             <video class="cmp-video" controls preload="none" playsinline poster="static/posters/uvisbench/javis/TWh_0KqZFMw_scene-0__instrument_ours.jpg">
               <source src="static/videos/uvisbench/javis/TWh_0KqZFMw_scene-0__instrument_ours.mp4" type="video/mp4">
             </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="section" id="javisbench">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">JavisBench</h2>
-        <div class="content has-text-justified">
-          <p>Fully specified prompts from JavisBench-mini.</p>
-        </div>
-        
-        <h3 class="title is-4">LTX-2.3</h3>
-        
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;In a dimly lit gym with the words &quot;HAMMER STRENGTH&quot; prominently displayed on the wall, there is music playing in the background. Some gym equipment and a couch can be seen in the background, adding to the moody atmosphere.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/mBY68kFvhq8_scene-6_base.jpg">
-              <source src="static/videos/javisbench/ltx/mBY68kFvhq8_scene-6_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/mBY68kFvhq8_scene-6_ours.jpg">
-              <source src="static/videos/javisbench/ltx/mBY68kFvhq8_scene-6_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A white dog with a slightly open mouth, its tongue hanging out, is barking and growling while looking to the side. The background is blurred, suggesting an outdoor setting with grass.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/aSgzGiO2Gmo_scene-0_base.jpg">
-              <source src="static/videos/javisbench/ltx/aSgzGiO2Gmo_scene-0_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/aSgzGiO2Gmo_scene-0_ours.jpg">
-              <source src="static/videos/javisbench/ltx/aSgzGiO2Gmo_scene-0_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A large whale breaches the surface of the ocean, starting partially submerged before lifting its body out of the water, creating a big splash and a cloud of white foam. The water splashes and gurgles as the whale moves through the air, making a whooshing sound, and then splashes back into the water. The whale&#x27;s body is dark gray with some lighter patches, and its tail is visible as it comes out of the water.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/1dfpg3dNqvs_scene-0_base.jpg">
-              <source src="static/videos/javisbench/ltx/1dfpg3dNqvs_scene-0_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/1dfpg3dNqvs_scene-0_ours.jpg">
-              <source src="static/videos/javisbench/ltx/1dfpg3dNqvs_scene-0_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person is riding a light brown horse with darker patches in an outdoor arena. The horse&#x27;s hooves can be heard hitting the ground as they move around the arena. The rider is wearing a dark outfit, and there are white fences surrounding the sandy ground. Trees and a building are visible in the background.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/4_IPYhQbB8w_base.jpg">
-              <source src="static/videos/javisbench/ltx/4_IPYhQbB8w_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/4_IPYhQbB8w_ours.jpg">
-              <source src="static/videos/javisbench/ltx/4_IPYhQbB8w_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A woman is performing a live street show, standing on a stage with a microphone and musical equipment. She is wearing a white top and patterned pants. In the background, a building with lights can be seen, along with people walking around and some plants and barriers on the street. Music plays in the background as she sings, and there are faint sounds of people walking and ambient noise from the street.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/3XMciegGpGo_scene-0_base.jpg">
-              <source src="static/videos/javisbench/ltx/3XMciegGpGo_scene-0_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/3XMciegGpGo_scene-0_ours.jpg">
-              <source src="static/videos/javisbench/ltx/3XMciegGpGo_scene-0_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A stork is flying over a beach with a pink bag in its beak. The beach has a sandy shore, blue water, and some green hills in the background, with palm trees on the right side of the frame. Waves crash on the shore and birds chirp in the background.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/fRi5D6GqFrk_scene-1_base.jpg">
-              <source src="static/videos/javisbench/ltx/fRi5D6GqFrk_scene-1_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/fRi5D6GqFrk_scene-1_ours.jpg">
-              <source src="static/videos/javisbench/ltx/fRi5D6GqFrk_scene-1_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;Three construction workers are on a site. One is in the foreground, wearing a yellow hard hat, a light blue shirt, and brown pants, holding a large hammer and working on something while hammering sounds can be heard. Another worker in the background is wearing a yellow hard hat and a red safety vest, holding a long metal rod. The third worker is partially visible, also in a yellow hard hat and red safety vest. Indistinct background noises from other construction activities or machinery can also be heard. They are all on a flat surface, possibly a construction site, with a blurred green background that looks like trees or bushes.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/CNg9Z4aYwVI_scene-0_base.jpg">
-              <source src="static/videos/javisbench/ltx/CNg9Z4aYwVI_scene-0_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/CNg9Z4aYwVI_scene-0_ours.jpg">
-              <source src="static/videos/javisbench/ltx/CNg9Z4aYwVI_scene-0_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;There&#x27;s a river flowing through a lush green forest, surrounded by rocks and dense vegetation. The trees are tall with vibrant green leaves that create a canopy overhead. The forest floor is covered with moss and ferns, and the sound of the steady flowing water adds a soothing ambiance.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/C_aEYm2oe4k_5043_5053_base.jpg">
-              <source src="static/videos/javisbench/ltx/C_aEYm2oe4k_5043_5053_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/C_aEYm2oe4k_5043_5053_ours.jpg">
-              <source src="static/videos/javisbench/ltx/C_aEYm2oe4k_5043_5053_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person is roller skating in a room with a wooden floor and brick walls. There are two large screens on the walls showing underwater scenes. The person is wearing a red and white outfit, a helmet, and knee pads. There is music playing in the background, and the sound of the roller skates can be heard on the wooden floor. There are also some plants and a few people sitting in the room.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/IDpfl2aGruE_scene-0_base.jpg">
-              <source src="static/videos/javisbench/ltx/IDpfl2aGruE_scene-0_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/IDpfl2aGruE_scene-0_ours.jpg">
-              <source src="static/videos/javisbench/ltx/IDpfl2aGruE_scene-0_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A steampunk-style helicopter, large and complex with gears, pipes, and a front propeller, hovers over a cobblestone street in a city. The helicopter emits smoke from its engines. The street is lined with Victorian-era buildings with lit windows and street lamps. People walk on the street, some looking up at the helicopter. In the background, music plays throughout.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/t1lqHIxS8KY_scene-10_base.jpg">
-              <source src="static/videos/javisbench/ltx/t1lqHIxS8KY_scene-10_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/t1lqHIxS8KY_scene-10_ours.jpg">
-              <source src="static/videos/javisbench/ltx/t1lqHIxS8KY_scene-10_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A machine is carving out a design on a surface, moving precisely over it and leaving a trail of dust or debris. The design consists of geometric shapes, possibly letters or symbols. In the background, music plays throughout.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/J2M9nxBEDhE_scene-0_base.jpg">
-              <source src="static/videos/javisbench/ltx/J2M9nxBEDhE_scene-0_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/J2M9nxBEDhE_scene-0_ours.jpg">
-              <source src="static/videos/javisbench/ltx/J2M9nxBEDhE_scene-0_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person plays the piano, with their hands moving across the keys. Musical notes and lyrics are displayed on the screen above the piano. The music has a melodic tune.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/qxhHQ11MyFk_base.jpg">
-              <source src="static/videos/javisbench/ltx/qxhHQ11MyFk_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/qxhHQ11MyFk_ours.jpg">
-              <source src="static/videos/javisbench/ltx/qxhHQ11MyFk_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;Three girls are on a stage performing. One is playing an acoustic guitar, another is singing into a microphone, and the third is playing a keyboard. They are dressed casually, and the stage is equipped with a drum set and speakers. In the background, a park with trees and people walking by can be seen. The music consists of the guitar, keyboard, and the singer&#x27;s vocals.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/yuSUERBLQjI_scene-0_base.jpg">
-              <source src="static/videos/javisbench/ltx/yuSUERBLQjI_scene-0_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/yuSUERBLQjI_scene-0_ours.jpg">
-              <source src="static/videos/javisbench/ltx/yuSUERBLQjI_scene-0_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A woman wearing a white headscarf and a colorful patterned dress is singing into a microphone. She stands in front of a shelf filled with various colorful hats, surrounded by some plants. The lighting is warm with a purple hue, and there is music playing in the background.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/0MQj1ytup2I_scene-9_base.jpg">
-              <source src="static/videos/javisbench/ltx/0MQj1ytup2I_scene-9_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/0MQj1ytup2I_scene-9_ours.jpg">
-              <source src="static/videos/javisbench/ltx/0MQj1ytup2I_scene-9_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person is riding a white horse in an outdoor arena, where the horse is trotting around the arena on a dirt surface. The rider is wearing a helmet and dark clothing. Wooden fences surround the arena, and in the background, there are some trees and a clear blue sky. The sound of the horse&#x27;s hooves hitting the dirt can be heard as it trots around the arena.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/0bISD6Q8cQs_base.jpg">
-              <source src="static/videos/javisbench/ltx/0bISD6Q8cQs_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/0bISD6Q8cQs_ours.jpg">
-              <source src="static/videos/javisbench/ltx/0bISD6Q8cQs_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A beautiful sunset casts a warm glow over jagged rock formations in the background, with the sky displaying a gradient of colors from orange to pink and purple. A small body of water in the foreground reflects the rocks and sky, and birds can be seen flying overhead. Soft, ambient music plays in the background.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/aA3JUfiZtts_scene-1_base.jpg">
-              <source src="static/videos/javisbench/ltx/aA3JUfiZtts_scene-1_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/aA3JUfiZtts_scene-1_ours.jpg">
-              <source src="static/videos/javisbench/ltx/aA3JUfiZtts_scene-1_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A person is riding a black horse along a path with a white fence on one side and greenery on the other. The horse&#x27;s hooves hit the ground as it walks. The rider is wearing a blue shirt and a hat.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/P13bN4xItZs_5000_10000_base.jpg">
-              <source src="static/videos/javisbench/ltx/P13bN4xItZs_5000_10000_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/P13bN4xItZs_5000_10000_ours.jpg">
-              <source src="static/videos/javisbench/ltx/P13bN4xItZs_5000_10000_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;A man in a green shirt is standing in a garage, looking at his phone. There is a car parked behind him. On the wall, there are two cartoon faces: one larger face with a smile and a smaller face giving a thumbs up. The sound of wind can be heard blowing.&rdquo;</p>
-        
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/IfSVradl4mo_scene-0_base.jpg">
-              <source src="static/videos/javisbench/ltx/IfSVradl4mo_scene-0_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/javisbench/ltx/IfSVradl4mo_scene-0_ours.jpg">
-              <source src="static/videos/javisbench/ltx/IfSVradl4mo_scene-0_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="section" id="audioset">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">AudioSet Captions, Underspecified</h2>
-        <div class="content has-text-justified">
-          <p>AudioSet captions whose sound source is underspecified. The original caption is shown in gray.</p>
-        </div>
-        
-        <h3 class="title is-4">LTX-2.3</h3>
-        
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;There were many yellow farm animals in the cage, as the farm animals made sounds and the people spoke.&rdquo;</p>
-        <p class="pair-orig">Original: &ldquo;There were many yellow cows in the cage, as the cattle barked and the people spoke.&rdquo;</p>
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/audioset/ltx/t950mKAXHJM_18_000_28_000_base.jpg">
-              <source src="static/videos/audioset/ltx/t950mKAXHJM_18_000_28_000_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/audioset/ltx/t950mKAXHJM_18_000_28_000_ours.jpg">
-              <source src="static/videos/audioset/ltx/t950mKAXHJM_18_000_28_000_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-        <h3 class="title is-4">JavisDiT++</h3>
-        
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;In one house, a pet was on the ground and yelling loudly, and the people next to him were yelling.&rdquo;</p>
-        <p class="pair-orig">Original: &ldquo;In one house, a dog was on the ground and yelling loudly, and the people next to him were yelling.&rdquo;</p>
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/audioset/javis/6kUtpAr79xU_60000_70000_base.jpg">
-              <source src="static/videos/audioset/javis/6kUtpAr79xU_60000_70000_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/audioset/javis/6kUtpAr79xU_60000_70000_ours.jpg">
-              <source src="static/videos/audioset/javis/6kUtpAr79xU_60000_70000_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
-          </div>
-        </div>
-      </div>
-      <div class="pair-panel">
-        <p class="pair-prompt">&ldquo;In front of the black curtain, with music, a man wearing headphones sat on a stool and played an instrument.&rdquo;</p>
-        <p class="pair-orig">Original: &ldquo;In front of the black curtain, with music, a man wearing headphones sat on a stool and tapped on a drum rack.&rdquo;</p>
-        <div class="columns is-mobile is-variable is-2 pair-videos">
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/audioset/javis/yj4xorgrbV4_30000_40000_base.jpg">
-              <source src="static/videos/audioset/javis/yj4xorgrbV4_30000_40000_base.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label">Base</p>
-          </div>
-          <div class="column has-text-centered">
-            <video class="cmp-video" controls preload="none" playsinline poster="static/posters/audioset/javis/yj4xorgrbV4_30000_40000_ours.jpg">
-              <source src="static/videos/audioset/javis/yj4xorgrbV4_30000_40000_ours.mp4" type="video/mp4">
-            </video>
-            <p class="pair-label is-ours">+ AV-REPA (Ours)</p>
+            <p class="pair-label is-ours">+ JointREPA (Ours)</p>
           </div>
         </div>
       </div>
@@ -988,7 +406,7 @@
     <h2 class="title">BibTeX</h2>
     <pre><code>@misc{jung2026beyond,
   author    = {Jung, Jihoo and Kim, Ji-Hoon and Lee, Suyeon and Pham, Gia Thinh and Chung, Joon Son},
-  title     = {Beyond Co-Generation: Rethinking Semantic Jointness in Audio--Video Generation},
+  title     = {Beyond Co-Generation: Rethinking Jointness in Joint Audio--Video Generation},
   year      = {2026},
 }</code></pre>
   </div>
