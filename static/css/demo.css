@@ -3,8 +3,13 @@ html { scroll-behavior: smooth; }
 
 .teaser-image {
   display: block;
-  width: 70%;
-  margin: 0 auto 1rem;
+  width: 85%;            /* of the four-fifths column under the abstract (~640 px on desktop) */
+  margin: 0.5rem auto 0;
+}
+
+/* the abstract follows the title / link buttons directly */
+.abstract-section {
+  padding-top: 0.5rem;
 }
 
 .method-image {
